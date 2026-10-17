@@ -211,6 +211,109 @@
   color: #A5B4FC;
 }
 
+/* ── Desktop Action Bar ── */
+.desktopActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Mobile Tools Toggle Button & Dropdown ── */
+.mobileToolsWrapper {
+  display: none;
+  position: relative;
+}
+
+.toolsToggleBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  color: var(--text-title);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.toolsToggleBtn:hover,
+.toolsToggleBtn.toolsToggleActive {
+  background: rgba(99, 102, 241, 0.25);
+  border-color: var(--accent-primary);
+  transform: scale(1.05);
+}
+
+.toolsDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 220px;
+  background: rgba(18, 20, 32, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 8px 6px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: slideInDown 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-xs);
+  color: var(--text-body);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.dropdownItem:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+
+.dropdownItem.dropdownActive {
+  background: rgba(99, 102, 241, 0.2);
+  color: #A5B4FC;
+}
+
+.dropdownIcon {
+  font-size: 16px;
+  width: 20px;
+  display: inline-flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dropdownCheck {
+  margin-left: auto;
+  font-weight: 800;
+  color: #6EE7B7;
+  font-size: 12px;
+}
+
+.dropdownDivider {
+  height: 1px;
+  background: var(--border-subtle);
+  margin: 4px 6px;
+}
+
 /* ── Interactive Canvas Viewport ── */
 .canvasArea {
   flex: 1;
@@ -522,9 +625,16 @@
 @media (max-width: 860px) {
   .topNav {
     padding: 8px 12px;
+    gap: 8px;
+  }
+  .desktopActions {
+    display: none;
+  }
+  .mobileToolsWrapper {
+    display: block;
   }
   .navCenter {
-    max-width: 200px;
+    max-width: 160px;
   }
   .desktopControls {
     bottom: 80px;
@@ -539,13 +649,33 @@
   .navCenter {
     display: none;
   }
-  .controlBtn span {
-    display: none;
-  }
-  .controlBtn {
-    padding: 8px;
+  .homeBtn {
+    padding: 6px 10px;
   }
   .homeBtn span {
     display: none;
+  }
+  .roomBadge {
+    padding: 6px 10px;
+    gap: 5px;
+  }
+  .roomCodeText {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+  }
+  .playerAvatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+    margin-left: -6px;
+  }
+  .toolsToggleBtn {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  .toolsDropdown {
+    width: 200px;
+    right: -4px;
   }
 }

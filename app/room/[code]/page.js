@@ -32,9 +32,27 @@ export default function RoomPage() {
   const [showRef, setShowRef] = useState(false);
   const [showGhost, setShowGhost] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
+  const [showToolsMenu, setShowToolsMenu] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
+
+  const toolsMenuRef = useRef(null);
+
+  // Close tools dropdown on click outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (toolsMenuRef.current && !toolsMenuRef.current.contains(e.target)) {
+        setShowToolsMenu(false);
+      }
+    };
+    if (showToolsMenu) {
+      document.addEventListener("pointerdown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("pointerdown", handleClickOutside);
+    };
+  }, [showToolsMenu]);
 
   // Refs for high-performance canvas loop
   const piecesRef = useRef([]);
@@ -886,55 +904,131 @@ export default function RoomPage() {
             ))}
           </div>
 
-          {/* Sound Toggle */}
-          <button
-            type="button"
-            className={`${styles.controlBtn} ${soundEnabled ? styles.btnActive : ""}`}
-            onClick={() => setSoundEnabled(!soundEnabled)}
-            title={soundEnabled ? "Mute audio" : "Enable audio"}
-          >
-            {soundEnabled ? "🔊" : "🔇"}
-          </button>
+          {/* Desktop Actions Bar (Hidden on Mobile) */}
+          <div className={styles.desktopActions}>
+            <button
+              type="button"
+              className={`${styles.controlBtn} ${soundEnabled ? styles.btnActive : ""}`}
+              onClick={() => setSoundEnabled(!soundEnabled)}
+              title={soundEnabled ? "Mute audio" : "Enable audio"}
+            >
+              {soundEnabled ? "🔊" : "🔇"}
+            </button>
 
-          {/* Ghost Guide Toggle */}
-          <button
-            type="button"
-            className={`${styles.controlBtn} ${showGhost ? styles.btnActive : ""}`}
-            onClick={() => setShowGhost(!showGhost)}
-            title="Toggle faint background guide"
-          >
-            👻 <span>Guide</span>
-          </button>
+            <button
+              type="button"
+              className={`${styles.controlBtn} ${showGhost ? styles.btnActive : ""}`}
+              onClick={() => setShowGhost(!showGhost)}
+              title="Toggle faint background guide"
+            >
+              👻 <span>Guide</span>
+            </button>
 
-          {/* Reference Image Toggle */}
-          <button
-            type="button"
-            className={`${styles.controlBtn} ${showRef ? styles.btnActive : ""}`}
-            onClick={() => setShowRef(!showRef)}
-            title="View finished image reference"
-          >
-            🖼️ <span>Reference</span>
-          </button>
+            <button
+              type="button"
+              className={`${styles.controlBtn} ${showRef ? styles.btnActive : ""}`}
+              onClick={() => setShowRef(!showRef)}
+              title="View finished image reference"
+            >
+              🖼️ <span>Reference</span>
+            </button>
 
-          {/* Fit / Recenter Button */}
-          <button
-            type="button"
-            className={styles.controlBtn}
-            onClick={fitPuzzleToView}
-            title="Fit board to screen"
-          >
-            🎯 <span>Center</span>
-          </button>
+            <button
+              type="button"
+              className={styles.controlBtn}
+              onClick={fitPuzzleToView}
+              title="Fit board to screen"
+            >
+              🎯 <span>Center</span>
+            </button>
 
-          {/* Scatter Unplaced Pieces Button */}
-          <button
-            type="button"
-            className={styles.controlBtn}
-            onClick={scatterUnplacedPieces}
-            title="Arrange unplaced pieces neatly in outer margins"
-          >
-            🔀 <span>Scatter</span>
-          </button>
+            <button
+              type="button"
+              className={styles.controlBtn}
+              onClick={scatterUnplacedPieces}
+              title="Arrange unplaced pieces neatly in outer margins"
+            >
+              🔀 <span>Scatter</span>
+            </button>
+          </div>
+
+          {/* Mobile Tools Dropdown Menu (Visible on narrow screens) */}
+          <div className={styles.mobileToolsWrapper} ref={toolsMenuRef}>
+            <button
+              type="button"
+              className={`${styles.toolsToggleBtn} ${showToolsMenu ? styles.toolsToggleActive : ""}`}
+              onClick={() => setShowToolsMenu((prev) => !prev)}
+              title="Outils"
+              aria-label="Outils"
+            >
+              🛠️
+            </button>
+
+            {showToolsMenu && (
+              <div className={styles.toolsDropdown}>
+                <button
+                  type="button"
+                  className={`${styles.dropdownItem} ${showRef ? styles.dropdownActive : ""}`}
+                  onClick={() => {
+                    setShowRef(!showRef);
+                    setShowToolsMenu(false);
+                  }}
+                >
+                  <span className={styles.dropdownIcon}>🖼️</span>
+                  <span>Photo modèle</span>
+                  {showRef && <span className={styles.dropdownCheck}>✓</span>}
+                </button>
+
+                <button
+                  type="button"
+                  className={`${styles.dropdownItem} ${showGhost ? styles.dropdownActive : ""}`}
+                  onClick={() => {
+                    setShowGhost(!showGhost);
+                    setShowToolsMenu(false);
+                  }}
+                >
+                  <span className={styles.dropdownIcon}>👻</span>
+                  <span>Guide fantôme</span>
+                  {showGhost && <span className={styles.dropdownCheck}>✓</span>}
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    fitPuzzleToView();
+                    setShowToolsMenu(false);
+                  }}
+                >
+                  <span className={styles.dropdownIcon}>🎯</span>
+                  <span>Centrer le puzzle</span>
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    scatterUnplacedPieces();
+                    setShowToolsMenu(false);
+                  }}
+                >
+                  <span className={styles.dropdownIcon}>🔀</span>
+                  <span>Ranger les pièces</span>
+                </button>
+
+                <div className={styles.dropdownDivider} />
+
+                <button
+                  type="button"
+                  className={`${styles.dropdownItem} ${soundEnabled ? styles.dropdownActive : ""}`}
+                  onClick={() => setSoundEnabled(!soundEnabled)}
+                >
+                  <span className={styles.dropdownIcon}>{soundEnabled ? "🔊" : "🔇"}</span>
+                  <span>{soundEnabled ? "Effets sonores (On)" : "Effets sonores (Off)"}</span>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </header>
 

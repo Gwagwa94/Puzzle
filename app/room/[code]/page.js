@@ -12,6 +12,8 @@ import {
   playVictorySound,
 } from "../../utils/jigsaw";
 
+import OrderPuzzleModal from "../../components/OrderPuzzleModal";
+
 export default function RoomPage() {
   const params = useParams();
   const router = useRouter();
@@ -33,6 +35,7 @@ export default function RoomPage() {
   const [showGhost, setShowGhost] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showToolsMenu, setShowToolsMenu] = useState(false);
+  const [showOrderModal, setShowOrderModal] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
@@ -950,6 +953,20 @@ export default function RoomPage() {
             >
               🔀 <span>Scatter</span>
             </button>
+
+            <button
+              type="button"
+              className={styles.controlBtn}
+              onClick={() => setShowOrderModal(true)}
+              style={{
+                background: "rgba(16, 185, 129, 0.16)",
+                borderColor: "rgba(16, 185, 129, 0.35)",
+                color: "#6EE7B7",
+              }}
+              title="Commander ce puzzle en version physique"
+            >
+              🎁 <span>Commander en vrai</span>
+            </button>
           </div>
 
           {/* Mobile Tools Dropdown Menu (Visible on narrow screens) */}
@@ -1014,6 +1031,19 @@ export default function RoomPage() {
                 >
                   <span className={styles.dropdownIcon}>🔀</span>
                   <span>Ranger les pièces</span>
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    setShowOrderModal(true);
+                    setShowToolsMenu(false);
+                  }}
+                  style={{ color: "#6EE7B7" }}
+                >
+                  <span className={styles.dropdownIcon}>🎁</span>
+                  <span>Commander en vrai</span>
                 </button>
 
                 <div className={styles.dropdownDivider} />
@@ -1192,7 +1222,18 @@ export default function RoomPage() {
               Incredible teamwork! Every classic notched piece was solved and locked into place.
             </p>
             <div className={styles.victoryActions}>
-              <Link href="/" className="btn btn-primary btn-lg">
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                onClick={() => setShowOrderModal(true)}
+                style={{
+                  background: "linear-gradient(135deg, #10B981 0%, #06B6D4 50%, #6366F1 100%)",
+                  boxShadow: "0 4px 20px rgba(16, 185, 129, 0.45)",
+                }}
+              >
+                🎁 Commander ce puzzle en vrai (Livraison offerte)
+              </button>
+              <Link href="/" className="btn btn-secondary btn-lg">
                 🚀 Create New Puzzle
               </Link>
               <button
@@ -1206,6 +1247,16 @@ export default function RoomPage() {
           </div>
         </div>
       )}
+
+      {/* Physical Puzzle Order Modal */}
+      <OrderPuzzleModal
+        isOpen={showOrderModal}
+        onClose={() => setShowOrderModal(false)}
+        imageUrl={roomData?.imageUrl}
+        imageWidth={roomData?.imageWidth}
+        imageHeight={roomData?.imageHeight}
+        roomCode={roomData?.code || roomCodeParam}
+      />
     </div>
   );
 }

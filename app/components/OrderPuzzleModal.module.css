@@ -1,0 +1,417 @@
+/* ── Physical Puzzle Order Modal ── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 16px;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modalContent {
+  background: linear-gradient(180deg, #161828 0%, #0D0F1A 100%);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  max-width: 580px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.75), 0 0 40px rgba(99, 102, 241, 0.2);
+  padding: 28px 24px;
+  position: relative;
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--text-body);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  z-index: 10;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+}
+
+.modalHeader {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.modalBadge {
+  display: inline-flex;
+  margin-bottom: 8px;
+}
+
+.modalTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+
+.modalSubtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* ── 3D Box Mockup ── */
+.mockupWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.boxMockup {
+  position: relative;
+  width: 240px;
+  height: 170px;
+  border-radius: 12px;
+  background: #1C1F33;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal);
+}
+
+.boxMockup:hover {
+  transform: translateY(-4px) rotate(-1deg);
+}
+
+.boxImageArea {
+  flex: 1;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.boxImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.boxRibbon {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.boxFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 8px;
+  padding: 0 4px;
+}
+
+.boxTitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.boxPiecesPill {
+  font-size: 10px;
+  font-weight: 800;
+  background: rgba(99, 102, 241, 0.25);
+  color: #A5B4FC;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* ── Quality Status Pill ── */
+.qualityRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-bottom: 20px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: var(--radius-full);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.qualityIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.qualityGood {
+  background: #10B981;
+  box-shadow: 0 0 8px #10B981;
+}
+
+.qualityNotice {
+  background: #F59E0B;
+  box-shadow: 0 0 8px #F59E0B;
+}
+
+/* ── Size Selector Cards ── */
+.sizeList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.sizeCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(12, 14, 24, 0.7);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sizeCard:hover {
+  border-color: var(--border-light);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.sizeCard.sizeActive {
+  border-color: var(--accent-primary);
+  background: rgba(99, 102, 241, 0.12);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.25);
+}
+
+.sizeLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sizeRadio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sizeCard.sizeActive .sizeRadio {
+  border-color: var(--accent-primary);
+}
+
+.sizeRadioDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
+
+.sizeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sizeNameRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sizeName {
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.bestSellerBadge {
+  font-size: 10px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #F59E0B, #EF4444);
+  color: #FFFFFF;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sizeDimensions {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.sizePrice {
+  font-size: 17px;
+  font-weight: 800;
+  color: #FFFFFF;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── Value Propositions List ── */
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  border: 1px solid var(--border-subtle);
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.featureIcon {
+  font-size: 14px;
+}
+
+/* ── Checkout Area ── */
+.checkoutArea {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.paypalContainer {
+  min-height: 48px;
+}
+
+.simulatedCheckoutBtn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-md);
+  color: #A5B4FC;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.simulatedCheckoutBtn:hover {
+  background: rgba(99, 102, 241, 0.16);
+  border-color: var(--accent-primary);
+  color: #FFFFFF;
+}
+
+/* ── Confirmation Screen ── */
+.successScreen {
+  text-align: center;
+  padding: 20px 10px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.successIcon {
+  font-size: 56px;
+  margin-bottom: 12px;
+  animation: bounce 1.2s infinite;
+}
+
+.successTitle {
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 6px;
+}
+
+.successText {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 440px;
+  margin: 0 auto 20px;
+  line-height: 1.5;
+}
+
+.orderRecapBox {
+  background: rgba(12, 14, 24, 0.85);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: left;
+  margin-bottom: 24px;
+  font-size: 13px;
+}
+
+.recapRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.recapRow:last-child {
+  border-bottom: none;
+}
+
+.recapLabel {
+  color: var(--text-muted);
+}
+
+.recapVal {
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+@media (max-width: 540px) {
+  .modalContent {
+    padding: 20px 16px;
+  }
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  .boxMockup {
+    width: 200px;
+    height: 145px;
+  }
+}

@@ -12,6 +12,8 @@ import {
   playVictorySound,
 } from "../../utils/jigsaw";
 
+import OrderPuzzleModal from "../../components/OrderPuzzleModal";
+
 export default function RoomPage() {
   const params = useParams();
   const router = useRouter();
@@ -33,11 +35,38 @@ export default function RoomPage() {
   const [showGhost, setShowGhost] = useState(false);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const [showToolsMenu, setShowToolsMenu] = useState(false);
+  const [showOrderModal, setShowOrderModal] = useState(false);
+  const [completedOrderData, setCompletedOrderData] = useState(null);
   const [toastMessage, setToastMessage] = useState("");
   const [zoom, setZoom] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
 
   const toolsMenuRef = useRef(null);
+
+  // Handle return from Stripe Checkout
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderStatus = urlParams.get("order_status");
+    const stripeSessionId = urlParams.get("session_id");
+
+    if (orderStatus === "success" && stripeSessionId) {
+      fetch(`/api/checkout/session?session_id=${stripeSessionId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && data.order) {
+            setCompletedOrderData(data.order);
+            setShowOrderModal(true);
+          }
+        })
+        .catch((err) => console.error("Error retrieving checkout session:", err));
+      window.history.replaceState({}, "", window.location.pathname);
+    } else if (orderStatus === "cancel") {
+      setToastMessage("Paiement Stripe annulé.");
+      setTimeout(() => setToastMessage(""), 4000);
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  }, []);
 
   // Close tools dropdown on click outside
   useEffect(() => {
@@ -950,6 +979,23 @@ export default function RoomPage() {
             >
               🔀 <span>Scatter</span>
             </button>
+
+            <button
+              type="button"
+              className={styles.controlBtn}
+              onClick={() => {
+                setCompletedOrderData(null);
+                setShowOrderModal(true);
+              }}
+              style={{
+                background: "rgba(99, 102, 241, 0.16)",
+                borderColor: "rgba(99, 102, 241, 0.35)",
+                color: "#A5B4FC",
+              }}
+              title="Commander ce puzzle en version physique"
+            >
+              🎁 <span>Commander en vrai</span>
+            </button>
           </div>
 
           {/* Mobile Tools Dropdown Menu (Visible on narrow screens) */}
@@ -1014,6 +1060,20 @@ export default function RoomPage() {
                 >
                   <span className={styles.dropdownIcon}>🔀</span>
                   <span>Ranger les pièces</span>
+                </button>
+
+                <button
+                  type="button"
+                  className={styles.dropdownItem}
+                  onClick={() => {
+                    setCompletedOrderData(null);
+                    setShowOrderModal(true);
+                    setShowToolsMenu(false);
+                  }}
+                  style={{ color: "#A5B4FC" }}
+                >
+                  <span className={styles.dropdownIcon}>🎁</span>
+                  <span>Commander en vrai</span>
                 </button>
 
                 <div className={styles.dropdownDivider} />
@@ -1192,7 +1252,21 @@ export default function RoomPage() {
               Incredible teamwork! Every classic notched piece was solved and locked into place.
             </p>
             <div className={styles.victoryActions}>
-              <Link href="/" className="btn btn-primary btn-lg">
+              <button
+                type="button"
+                className="btn btn-primary btn-lg"
+                onClick={() => {
+                  setCompletedOrderData(null);
+                  setShowOrderModal(true);
+                }}
+                style={{
+                  background: "linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #EC4899 100%)",
+                  boxShadow: "0 4px 20px rgba(99, 102, 241, 0.45)",
+                }}
+              >
+                🎁 Commander ce puzzle en vrai (Livraison offerte)
+              </button>
+              <Link href="/" className="btn btn-secondary btn-lg">
                 🚀 Create New Puzzle
               </Link>
               <button
@@ -1206,6 +1280,20 @@ export default function RoomPage() {
           </div>
         </div>
       )}
+
+      {/* Physical Puzzle Order Modal (Stripe Checkout) */}
+      <OrderPuzzleModal
+        isOpen={showOrderModal}
+        onClose={() => {
+          setShowOrderModal(false);
+          setCompletedOrderData(null);
+        }}
+        imageUrl={roomData?.imageUrl}
+        imageWidth={roomData?.imageWidth}
+        imageHeight={roomData?.imageHeight}
+        roomCode={roomData?.code || roomCodeParam}
+        initialCompletedOrder={completedOrderData}
+      />
     </div>
   );
 }

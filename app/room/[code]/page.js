@@ -1024,7 +1024,7 @@ export default function RoomPage() {
                   onClick={() => setSoundEnabled(!soundEnabled)}
                 >
                   <span className={styles.dropdownIcon}>{soundEnabled ? "🔊" : "🔇"}</span>
-                  <span>{soundEnabled ? "Effets sonores (On)" : "Effets sonores (Off)"}</span>
+                  <span>{soundEnabled ? "Effets sonores (activés)" : "Effets sonores (désactivés)"}</span>
                 </button>
               </div>
             )}
@@ -1043,7 +1043,7 @@ export default function RoomPage() {
       {loading ? (
         <div className={styles.loadingScreen}>
           <div className="spinner" style={{ width: 44, height: 44 }} />
-          <div className={styles.loadingHeading}>Connecting to Puzzle Room...</div>
+          <div className={styles.loadingHeading}>Connecting to puzzle room...</div>
           <div className={styles.loadingSub}>
             Carving classic notched pieces & synchronizing board state
           </div>
@@ -1078,7 +1078,7 @@ export default function RoomPage() {
                     return nz;
                   });
                 }}
-                title="Zoom In"
+                title="Zoom in"
               >
                 +
               </button>
@@ -1093,7 +1093,7 @@ export default function RoomPage() {
                     return nz;
                   });
                 }}
-                title="Zoom Out"
+                title="Zoom out"
               >
                 −
               </button>
@@ -1105,7 +1105,7 @@ export default function RoomPage() {
             <div className={styles.referenceDrawer}>
               <div className={styles.refHeader}>
                 <div className={styles.refTitle}>
-                  <span>🖼️</span> Completed Picture Reference
+                  <span>🖼️</span> Completed picture reference
                 </div>
                 <button
                   type="button"
@@ -1138,7 +1138,7 @@ export default function RoomPage() {
               }}
             >
               <span className={styles.mobileToolIcon}>🔍+</span>
-              Zoom In
+              Zoom in
             </button>
             <button
               type="button"
@@ -1152,7 +1152,7 @@ export default function RoomPage() {
               }}
             >
               <span className={styles.mobileToolIcon}>🔍−</span>
-              Zoom Out
+              Zoom out
             </button>
             <button
               type="button"
@@ -1187,20 +1187,20 @@ export default function RoomPage() {
         <div className={styles.victoryOverlay}>
           <div className={styles.victoryCard}>
             <div className={styles.victoryIcon}>🏆</div>
-            <h2 className={styles.victoryTitle}>Puzzle Complete!</h2>
+            <h2 className={styles.victoryTitle}>Puzzle complete!</h2>
             <p className={styles.victoryMessage}>
               Incredible teamwork! Every classic notched piece was solved and locked into place.
             </p>
             <div className={styles.victoryActions}>
               <Link href="/" className="btn btn-primary btn-lg">
-                🚀 Create New Puzzle
+                🚀 Create new puzzle
               </Link>
               <button
                 type="button"
                 className="btn btn-secondary btn-lg"
                 onClick={() => setComplete(false)}
               >
-                Inspect Board
+                Inspect board
               </button>
             </div>
           </div>

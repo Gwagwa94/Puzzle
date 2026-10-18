@@ -9,7 +9,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "PuzzleTogether — Multiplayer Jigsaw Puzzles",
+  title: "PuzzleTogether — Multiplayer jigsaw puzzles",
   description:
     "Solve jigsaw puzzles together in real-time with room codes. Authentic puzzle notches, custom images, and no account required.",
   keywords: "jigsaw puzzle, multiplayer, online puzzle, co-op puzzle, room code, real-time",

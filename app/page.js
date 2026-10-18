@@ -7,56 +7,56 @@ import styles from "./page.module.css";
 const CURATED_IMAGES = [
   {
     id: "mountain-lake",
-    label: "Alpine Mountain Lake",
+    label: "Alpine mountain lake",
     category: "Mountains",
     url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "autumn-forest",
-    label: "Golden Autumn Forest",
+    label: "Golden autumn forest",
     category: "Forest",
     url: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "wildflowers",
-    label: "Field of Wildflowers",
+    label: "Field of wildflowers",
     category: "Flora",
     url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "enchanted-woods",
-    label: "Sunlit Green Woodland",
+    label: "Sunlit green woodland",
     category: "Nature",
     url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "tropical-beach",
-    label: "Tropical Ocean Sunset",
+    label: "Tropical ocean sunset",
     category: "Beach",
     url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "bavarian-castle",
-    label: "Fairytale Alpine Castle",
+    label: "Fairytale alpine castle",
     category: "Castle",
     url: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "aurora-cosmos",
-    label: "Northern Lights & Stars",
+    label: "Northern lights & stars",
     category: "Night Sky",
     url: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=450&q=70&auto=format&fit=crop",
   },
   {
     id: "desert-dunes",
-    label: "Golden Desert Dunes",
+    label: "Golden desert dunes",
     category: "Desert",
     url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=450&q=70&auto=format&fit=crop",
@@ -255,22 +255,22 @@ export default function Home() {
           <div className={styles.brandIcon}>🧩</div>
           <div className={styles.brandText}>
             <div className={styles.brandName}>Puzzle<span>Together</span></div>
-            <div className={styles.brandTagline}>Multiplayer Jigsaw Co-op</div>
+            <div className={styles.brandTagline}>Multiplayer jigsaw co-op</div>
           </div>
         </div>
         <div className={styles.navFeatures}>
-          <span className="badge badge-brand">⚡ Real-time Notches</span>
-          <span className="badge badge-success">🔒 Room Codes</span>
+          <span className="badge badge-brand">⚡ Real-time notches</span>
+          <span className="badge badge-success">🔒 Room codes</span>
         </div>
       </header>
 
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroBadge}>
-          <span className="badge badge-brand">Instant Multiplayer • No Accounts</span>
+          <span className="badge badge-brand">Instant multiplayer • No accounts</span>
         </div>
         <h1 className={styles.heroTitle}>
-          Assemble Jigsaw Puzzles <span>Together in Real-Time</span>
+          Assemble jigsaw puzzles <span>together in real-time</span>
         </h1>
         <p className={styles.heroSubtitle}>
           Pick a high-res image, choose authentic notched pieces, and share a room code with friends to solve it simultaneously.
@@ -327,14 +327,14 @@ export default function Home() {
             className={`${styles.tabBtn} ${activeTab === "create" ? styles.tabActive : ""}`}
             onClick={() => { setActiveTab("create"); setErrorMessage(""); }}
           >
-            <span>🧩</span> Create New Game
+            <span>🧩</span> Create new game
           </button>
           <button
             type="button"
             className={`${styles.tabBtn} ${activeTab === "join" ? styles.tabActive : ""}`}
             onClick={() => { setActiveTab("join"); setErrorMessage(""); }}
           >
-            <span>🔑</span> Join with Code
+            <span>🔑</span> Join with code
           </button>
         </div>
 
@@ -345,9 +345,9 @@ export default function Home() {
             <div className={styles.sectionBlock}>
               <div className={styles.sectionHeader}>
                 <div className={styles.sectionTitle}>
-                  <span className={styles.sectionStep}>1</span> Choose a Puzzle Image
+                  <span className={styles.sectionStep}>1</span> Choose a puzzle image
                 </div>
-                <span className="badge badge-brand">High-Res Curated</span>
+                <span className="badge badge-brand">High-res curated</span>
               </div>
 
               <div className={styles.imageGrid}>
@@ -392,14 +392,14 @@ export default function Home() {
                       alt="Custom Preview"
                     />
                     <div className={styles.uploadMeta}>
-                      <div className={styles.uploadFileName}>✅ {customFileName || "Custom Image"}</div>
+                      <div className={styles.uploadFileName}>✅ {customFileName || "Custom image"}</div>
                       <div className={styles.uploadFileHint}>Click to choose a different photo</div>
                     </div>
                   </div>
                 ) : (
                   <div className={styles.uploadEmpty}>
                     <div className={styles.uploadIcon}>📸</div>
-                    <div className={styles.uploadTitle}>Or Upload Your Own Custom Image</div>
+                    <div className={styles.uploadTitle}>Or upload your own custom image</div>
                     <div className={styles.uploadSubtitle}>PNG, JPEG, WebP up to 12MB • High resolution recommended</div>
                   </div>
                 )}
@@ -417,9 +417,9 @@ export default function Home() {
             <div className={styles.sectionBlock}>
               <div className={styles.sectionHeader}>
                 <div className={styles.sectionTitle}>
-                  <span className={styles.sectionStep}>2</span> Number of Pieces
+                  <span className={styles.sectionStep}>2</span> Number of pieces
                 </div>
-                <span className="badge badge-brand">Classic Notches</span>
+                <span className="badge badge-brand">Classic notches</span>
               </div>
 
               {/* Presets */}
@@ -449,7 +449,7 @@ export default function Home() {
                   onChange={(e) => setPieceCount(parseInt(e.target.value, 10))}
                 />
                 <div className={styles.sliderReadout}>
-                  <span className={styles.sliderCount}>{actualPieces} Pieces</span>
+                  <span className={styles.sliderCount}>{actualPieces} pieces</span>
                   <span className={styles.sliderGridDim}>{cols} cols × {rows} rows</span>
                 </div>
               </div>
@@ -473,10 +473,10 @@ export default function Home() {
                 {loading ? (
                   <>
                     <span className="spinner" />
-                    Generating Puzzle Board...
+                    Generating puzzle board...
                   </>
                 ) : (
-                  <>🚀 Launch Puzzle Room</>
+                  <>🚀 Launch puzzle room</>
                 )}
               </button>
             </div>
@@ -487,7 +487,7 @@ export default function Home() {
         {activeTab === "join" && (
           <div className={styles.joinContainer}>
             <div className={styles.sectionTitle} style={{ justifyContent: "center" }}>
-              Enter 6-Character Room Code
+              Enter 6-character room code
             </div>
             <p style={{ color: "var(--text-muted)", fontSize: 13, marginTop: 6 }}>
               Ask your friend for the code shown in their puzzle header.
@@ -525,7 +525,7 @@ export default function Home() {
                 onClick={handleJoinRoom}
                 disabled={!joinCode.trim()}
               >
-                🎯 Enter Room & Play
+                🎯 Enter room & play
               </button>
             </div>
           </div>
